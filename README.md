@@ -69,4 +69,4 @@ Origin Repo: [https://github.com/dee1024/pytorch-captcha-recognition](https://gi
 作者
 ===
 * __Dee Qiu__ <coolcooldee@gmail.com>
-* __Qingcai Cui__ <cqc@cuiqingcai.com>
+* __Germey__ <cqc@cuiqingcai.com>
