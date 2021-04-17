@@ -4,7 +4,7 @@ import torch
 from torch.autograd import Variable
 # from visdom import Visdom # pip install Visdom
 import captcha_setting
-import my_dataset
+import dataset
 from model import CNN
 
 
@@ -14,7 +14,7 @@ def main():
     cnn.load_state_dict(torch.load('model.pkl'))
     print("load cnn net.")
     
-    predict_dataloader = my_dataset.get_predict_data_loader()
+    predict_dataloader = dataset.get_predict_data_loader()
     
     # vis = Visdom()
     for i, (images, labels) in enumerate(predict_dataloader):

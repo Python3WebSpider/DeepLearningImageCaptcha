@@ -2,7 +2,7 @@
 import torch
 import torch.nn as nn
 from torch.autograd import Variable
-import my_dataset
+import dataset
 from model import CNN
 from test import main as test
 
@@ -22,7 +22,7 @@ def main():
     
     max_test_acc = -1
     # Train the Model
-    train_dataloader = my_dataset.get_train_data_loader()
+    train_dataloader = dataset.get_train_data_loader()
     for epoch in range(num_epochs):
         for i, (images, labels) in enumerate(train_dataloader):
             images = Variable(images)

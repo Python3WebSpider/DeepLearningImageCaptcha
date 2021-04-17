@@ -3,7 +3,7 @@ import numpy as np
 import torch
 from torch.autograd import Variable
 import captcha_setting
-import my_dataset
+import dataset
 from model import CNN
 import one_hot_encoding
 
@@ -14,7 +14,7 @@ def main():
     cnn.load_state_dict(torch.load('model.pkl'))
     print("load cnn net.")
     
-    test_dataloader = my_dataset.get_test_data_loader()
+    test_dataloader = dataset.get_test_data_loader()
     
     correct = 0
     total = 0
