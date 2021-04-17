@@ -4,7 +4,7 @@ from torch.utils.data import DataLoader, Dataset
 import torchvision.transforms as transforms
 from PIL import Image
 import one_hot_encoding as ohe
-import captcha_setting
+import setting
 
 
 class mydataset(Dataset):
@@ -35,15 +35,15 @@ transform = transforms.Compose([
 
 
 def get_train_data_loader():
-    dataset = mydataset(captcha_setting.TRAIN_DATASET_PATH, transform=transform)
+    dataset = mydataset(setting.TRAIN_DATASET_PATH, transform=transform)
     return DataLoader(dataset, batch_size=64, shuffle=True)
 
 
 def get_test_data_loader():
-    dataset = mydataset(captcha_setting.TEST_DATASET_PATH, transform=transform)
+    dataset = mydataset(setting.TEST_DATASET_PATH, transform=transform)
     return DataLoader(dataset, batch_size=1, shuffle=True)
 
 
 def get_predict_data_loader():
-    dataset = mydataset(captcha_setting.PREDICT_DATASET_PATH, transform=transform)
+    dataset = mydataset(setting.PREDICT_DATASET_PATH, transform=transform)
     return DataLoader(dataset, batch_size=1, shuffle=True)

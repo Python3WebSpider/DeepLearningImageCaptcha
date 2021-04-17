@@ -1,15 +1,16 @@
 # -*- coding: UTF-8 -*-
 import numpy as np
-import captcha_setting
+import setting
 
 
 def encode(text):
-    vector = np.zeros(captcha_setting.ALL_CHAR_SET_LEN * captcha_setting.MAX_CAPTCHA, dtype=float)
+    vector = np.zeros(setting.ALL_CHAR_SET_LEN * setting.MAX_CAPTCHA, dtype=float)
+    
     def char2pos(c):
-        if c =='_':
+        if c == '_':
             k = 62
             return k
-        k = ord(c)-48
+        k = ord(c) - 48
         if k > 9:
             k = ord(c) - 65 + 10
             if k > 35:
@@ -17,20 +18,22 @@ def encode(text):
                 if k > 61:
                     raise ValueError('error')
         return k
+    
     for i, c in enumerate(text):
-        idx = i * captcha_setting.ALL_CHAR_SET_LEN + char2pos(c)
+        idx = i * setting.ALL_CHAR_SET_LEN + char2pos(c)
         vector[idx] = 1.0
     return vector
 
+
 def decode(vec):
     char_pos = vec.nonzero()[0]
-    text=[]
+    text = []
     for i, c in enumerate(char_pos):
-        char_at_pos = i #c/63
-        char_idx = c % captcha_setting.ALL_CHAR_SET_LEN
+        char_at_pos = i  # c/63
+        char_idx = c % setting.ALL_CHAR_SET_LEN
         if char_idx < 10:
             char_code = char_idx + ord('0')
-        elif char_idx <36:
+        elif char_idx < 36:
             char_code = char_idx - 10 + ord('A')
         elif char_idx < 62:
             char_code = char_idx - 36 + ord('a')
@@ -40,6 +43,7 @@ def decode(vec):
             raise ValueError('error')
         text.append(chr(char_code))
     return "".join(text)
+
 
 if __name__ == '__main__':
     e = encode("BK7H")
