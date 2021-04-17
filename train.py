@@ -3,12 +3,15 @@ import torch
 import torch.nn as nn
 from torch.autograd import Variable
 import my_dataset
-from captcha_cnn_model import CNN
+from model import CNN
+from test import main as test
 
 # Hyper Parameters
 num_epochs = 30
 batch_size = 100
 learning_rate = 0.001
+
+
 
 def main():
     cnn = CNN()
@@ -16,7 +19,8 @@ def main():
     print('init net')
     criterion = nn.MultiLabelSoftMarginLoss()
     optimizer = torch.optim.Adam(cnn.parameters(), lr=learning_rate)
-
+    
+    max_test_acc = -1
     # Train the Model
     train_dataloader = my_dataset.get_train_data_loader()
     for epoch in range(num_epochs):
@@ -30,16 +34,19 @@ def main():
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
-            if (i+1) % 10 == 0:
+            if (i + 1) % 10 == 0:
                 print("epoch:", epoch, "step:", i, "loss:", loss.item())
-            if (i+1) % 100 == 0:
-                torch.save(cnn.state_dict(), "./model.pkl")   #current is model.pkl
+            if (i + 1) % 100 == 0:
+                torch.save(cnn.state_dict(), "./model.pkl")  # current is model.pkl
                 print("save model")
         print("epoch:", epoch, "step:", i, "loss:", loss.item())
-    torch.save(cnn.state_dict(), "./model.pkl")   #current is model.pkl
+        test_acc = test()
+        if test_acc > max_test_acc:
+            torch.save(cnn.state_dict(), "./best_model.pkl")  # best model save as best_model.pkl
+            print("save best model")
+    torch.save(cnn.state_dict(), "./model.pkl")  # current is model.pkl
     print("save last model")
+
 
 if __name__ == '__main__':
     main()
-
-
