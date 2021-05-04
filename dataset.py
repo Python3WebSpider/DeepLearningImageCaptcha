@@ -3,7 +3,7 @@ import os
 from torch.utils.data import DataLoader, Dataset
 import torchvision.transforms as transforms
 from PIL import Image
-import one_hot_encoding as ohe
+import encoding as ohe
 import setting
 
 
@@ -39,8 +39,8 @@ def get_train_data_loader():
     return DataLoader(dataset, batch_size=64, shuffle=True)
 
 
-def get_test_data_loader():
-    dataset = mydataset(setting.TEST_DATASET_PATH, transform=transform)
+def get_eval_data_loader():
+    dataset = mydataset(setting.EVAL_DATASET_PATH, transform=transform)
     return DataLoader(dataset, batch_size=1, shuffle=True)
 
 

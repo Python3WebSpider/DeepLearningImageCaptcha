@@ -23,8 +23,8 @@ def generate_captcha_text_and_image():
 
 
 if __name__ == '__main__':
-    count = 100
-    path = setting.TRAIN_DATASET_PATH
+    count = 3000
+    path = setting.EVAL_DATASET_PATH
     if not os.path.exists(path):
         os.makedirs(path)
     for i in range(count):
