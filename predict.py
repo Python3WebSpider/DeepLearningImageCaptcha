@@ -3,7 +3,7 @@ import numpy as np
 import torch
 from torch.autograd import Variable
 # from visdom import Visdom # pip install Visdom
-import captcha_setting
+import setting
 import dataset
 from model import CNN
 
@@ -22,13 +22,13 @@ def main():
         vimage = Variable(image)
         predict_label = cnn(vimage)
         
-        c0 = captcha_setting.ALL_CHAR_SET[np.argmax(predict_label[0, 0:captcha_setting.ALL_CHAR_SET_LEN].data.numpy())]
-        c1 = captcha_setting.ALL_CHAR_SET[np.argmax(
-            predict_label[0, captcha_setting.ALL_CHAR_SET_LEN:2 * captcha_setting.ALL_CHAR_SET_LEN].data.numpy())]
-        c2 = captcha_setting.ALL_CHAR_SET[np.argmax(
-            predict_label[0, 2 * captcha_setting.ALL_CHAR_SET_LEN:3 * captcha_setting.ALL_CHAR_SET_LEN].data.numpy())]
-        c3 = captcha_setting.ALL_CHAR_SET[np.argmax(
-            predict_label[0, 3 * captcha_setting.ALL_CHAR_SET_LEN:4 * captcha_setting.ALL_CHAR_SET_LEN].data.numpy())]
+        c0 = setting.ALL_CHAR_SET[np.argmax(predict_label[0, 0:setting.ALL_CHAR_SET_LEN].data.numpy())]
+        c1 = setting.ALL_CHAR_SET[np.argmax(
+            predict_label[0, setting.ALL_CHAR_SET_LEN:2 * setting.ALL_CHAR_SET_LEN].data.numpy())]
+        c2 = setting.ALL_CHAR_SET[np.argmax(
+            predict_label[0, 2 * setting.ALL_CHAR_SET_LEN:3 * setting.ALL_CHAR_SET_LEN].data.numpy())]
+        c3 = setting.ALL_CHAR_SET[np.argmax(
+            predict_label[0, 3 * setting.ALL_CHAR_SET_LEN:4 * setting.ALL_CHAR_SET_LEN].data.numpy())]
         
         c = '%s%s%s%s' % (c0, c1, c2, c3)
         print(c)
